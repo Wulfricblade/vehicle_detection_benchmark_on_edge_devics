@@ -1,0 +1,3 @@
+Model,Frames,Detections,Average FPS,Latency (ms),Processing Time (s),Peak GPU Memory (GB)
+YOLOv8n,727,4921,80.82,8.86,8.99,0.02
+YOLO11n,727,4364,81.1,9.46,8.96,0.07

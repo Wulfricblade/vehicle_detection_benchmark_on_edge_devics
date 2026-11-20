@@ -1,0 +1,11 @@
+benchmark-.\.venv\Scripts\python.exe src\benchmark_video.py
+
+train yolo11- .\.venv\Scripts\python.exe -c "from ultralytics import YOLO; model=YOLO('yolo11n.pt'); model.train(data='datasets/3-lc-multi-vehicle-detection-challenge/kaggle_vehicles/dataset.yaml', epochs=50, imgsz=640, batch=16, device=0, workers=4, project='runs/benchmark', name='yolo11n', exist_ok=True)"
+
+train yolo 8- .\.venv\Scripts\python.exe -c "from ultralytics import YOLO; model=YOLO('yolov8n.pt'); model.train(data='datasets/3-lc-multi-vehicle-detection-challenge/kaggle_vehicles/dataset.yaml', epochs=50, imgsz=640, batch=16, device=0, workers=4, project='runs/benchmark', name='yolov8n', exist_ok=True)"
+
+results- ultralytics - .\.venv\Scripts\python.exe -c "import pandas as pd; files={'YOLOv8n':'runs/detect/runs/benchmark/yolov8n/results.csv','YOLO11n':'runs/detect/runs/benchmark/yolo11n/results.csv'}; [(print('\n--- '+name+' ---'), print('Columns:', list((df:=pd.read_csv(path)).columns)), print('\nFinal epoch results:\n', df.tail(1).to_string(index=False))) for name,path in files.items()]"
+
+vehicle detection yolo 8n - .\.venv\Scripts\yolo.exe predict model="runs/detect/runs/benchmark/yolov8n/weights/best.pt" source="videos/traffic_test.mp4" save=True
+
+vehicle yolo 11n - .\.venv\Scripts\yolo.exe predict model="runs/detect/runs/benchmark/yolo11n/weights/best.pt" source="videos/traffic_test.mp4" save=True

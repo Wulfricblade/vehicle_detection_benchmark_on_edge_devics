@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+*.pt
+*.onnx
+runs/
+datasets/
+results/*.csv
+results/*.png
+results/*.json
